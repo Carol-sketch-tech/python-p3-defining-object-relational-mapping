@@ -1,0 +1,67 @@
+OBject Relational mapping 
+Create a python object using SQL database records.
+create SQL DATABASE records using python Objects.
+
+ORM is a technique that  is used to convert database records into objects in an object-oriented language.
+
+it is also a technique that us used for accessing a relational database using an object oritented programming language.
+it is a way for our python progrmas to manage database data by ,apping datbase tables to classes and instances of classes to rows in those tables.
+it is a manner in which we implement the code that connects out python program to our database.
+w can use the following code to connect our python program to a given database:
+
+    db_connection = sqlite3.connect('db/my_database.db')
+    db_cursor = db_connection.cursor()
+
+    db_connection = sqlite3.connect('db/my_database.db')
+
+sqlite3.connect(): This function establishes a connection to an SQLite database. If the specified database file doesn’t exist, SQLite will create it.
+'db/my_database.db': This is the file path to the SQLite database. In this case, it's a file named my_database.db located in the db directory relative to the current working directory. If this file doesn’t exist, SQLite will create it.
+db_connection: This variable holds the connection object returned by sqlite3.connect(). This object is used to interact with the database.
+db_cursor = db_connection.cursor()
+
+db_connection.cursor(): This method creates a cursor object from the database connection. A cursor is used to execute SQL commands and queries.
+db_cursor: This variable holds the cursor object. Through this cursor, you can execute SQL commands and retrieve data from the database.
+In summary:
+
+db_connection is the object you use to manage the connection to the SQLite database.
+db_cursor is the object you use to execute SQL queries and fetch data.
+
+
+Note that when mapping our programs to a database we equate classes with the database table and instances fo those classes with the rows of the tables in 
+the database. this might be reffered to as wrapping a database, because we are writing python ocde that wraps or handles SQL.
+
+WHY USE ORM?
+    1. Cutting down on repetitive code.
+    2. Implementing conventional patterns that are organized and sensical.
+
+CUTTING DOWN ON REPETITON.
+Lets say we have a program that keeps track of a pets and owners of pets that a verterinary treats.
+we will have two classes Owner class and  Cat class. among other classes to represent other pets.
+out program need to connect to a databse so that the veterinary office can persist information about its pets and owners.
+
+db_connection = sqlite3.connect('pets.db')
+db_cursor = db_connection.cursor()
+
+# create an owners table and a cats table 
+db_cursor.execute('CREATE TABLE IF NOT EXISTS cats(id INTEGER PRIMARY KEY, name TEXT, breed TEXT, age INTEGER)')
+db_cursor.execute('CREATE TABLE IF NOT EXISTS owners(id INTEGER PRIMARY KEY, name TEXT)')
+
+# INSERT New cats and owners into these tables.
+db_cursor.execute('INSERT INTO cats (name, breed, age) VALUES ("Maru","Scottish fold",3)')
+db_cursor.execute("INSERT INTO cats (name, breed, age) VALUES ('Hana', 'tortoiseshell', 1)")
+
+ notice that in the line above there is alot of repetion
+ repetition will also occur when we call the SELECT statement when w want to execute it when we call the db_cursor.execute method and only differ in the 
+ specifics of what data we are selecting from which table.
+ to avoid reperiotion we can write a series of methods to abstract that behavour.
+
+ for example we can write a save() method on out Cat class that handles the common actions of INSERTing data into the database
+
+
+
+ LOGICAL DESIGN.
+ We use the convection : classes are mapped to or equatd with tables and instances of a class are equated to table rows.
+ if we have  cats class we have a cats table.
+ if we have cat isntances stores as rows in the cats table.
+ 
+
